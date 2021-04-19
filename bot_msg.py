@@ -10,7 +10,7 @@ bot = telebot.TeleBot(telegram_token_eew_santiago_bot)
 
 @bot.message_handler(commands=['info'])
 def handle_command(message):
-    bot.reply_to(message, "Este bot te permite recibir alertas rápidas de los sismos que ocurren en Chile, las que puedes personalizar a tu gusto.\nPara empezar a recibir alertas personalizadas de terremotos utiliza el comando '/suscribirse' y sigue las instrucciones.\nSi deseas recibir todas las alertas disponibles puedes usar el comando /canal para unirte al canal que contiene todas las alertas de sismos en Chile.\nPara mayor información sobre los comandos disponibles utiliza el comando '/comandos'.\nPara conocer el detalle de como funciona este bot utiliza el comando /teoria.")
+    bot.reply_to(message, "Este bot te permite recibir alertas rápidas de los sismos que ocurren en Chile, las que puedes personalizar a tu gusto.\n\nPara empezar a recibir alertas personalizadas de terremotos utiliza el comando '/suscribirse' y sigue las instrucciones.\n\nSi deseas recibir todas las alertas disponibles puedes usar el comando /canal para unirte al canal que contiene todas las alertas de sismos en Chile.\n\nPara mayor información sobre los comandos disponibles utiliza el comando '/comandos'.\n\nPara conocer el detalle de como funciona este bot utiliza el comando /teoria.")
 
 
 @bot.message_handler(commands=['comandos'])
@@ -19,13 +19,13 @@ def handle_command(message):
 
 @bot.message_handler(commands=['suscribirse'])
 def handle_command(message):
-    bot.reply_to(message, "Felicidades, has sido suscrito a las alertas de terremotos en Chile. Este proceso puede tardar un par de horas en tomar efecto.\nRecibirás una notificación por este chat cada vez que ocurra un sismo de magnitud preliminar superior a 3.0 en Chile.\nPara personalizar las notificaciones que recibes utiliza los comandos /magnitud, /ubicacion y /distancia.\nPara dejar de recibir notificaciones utiliza el comando /desuscribirse.")
+    bot.reply_to(message, "Felicidades, has sido suscrito a las alertas de terremotos en Chile. Este proceso puede tardar un par de horas en tomar efecto.\n\nRecibirás una notificación por este chat cada vez que ocurra un sismo de magnitud preliminar superior a 3.0 en Chile.\n\nPara personalizar las notificaciones que recibes utiliza los comandos /magnitud, /ubicacion y /distancia.\n\nPara dejar de recibir notificaciones utiliza el comando /desuscribirse.")
 
 @bot.message_handler(commands=['desuscribirse'])
 def handle_command(message):
-    bot.reply_to(message, "Ya no recibirás notificaciones por este medio. Este proceso puede tardar un par de horas en tomar efecto. Gracias por participar de este proceso.")
+    bot.reply_to(message, "Ya no recibirás notificaciones por este medio. Este proceso puede tardar un par de horas en tomar efecto. \n\nGracias por participar de este proceso.")
 		 
-@bot.message_handler(commands=['magnitud '])
+@bot.message_handler(commands=['magnitud'])
 def handle_command(message):
     bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones? Selecciona un valor entre las siguientes opciones (valor por defecto 3.0) 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5 Recuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.")
 		 
