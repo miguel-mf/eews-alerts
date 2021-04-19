@@ -1,4 +1,7 @@
 #!/usr/bin/python
+
+# Codigo obtenido desde http://www.postgresqltutorial.com/postgresql-python/connect/
+
 from configparser import ConfigParser
 
 
