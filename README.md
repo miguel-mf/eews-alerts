@@ -12,7 +12,7 @@ Para mayor información sobre los comandos disponibles utiliza el comando '/coma
 Para conocer el detalle de como funciona este bot utiliza el comando /teoria.
 
 - /comando
-Los comandos disponibles para este bot son los siguientes:
+Los comandos disponibles para este bot son los siguientes:\n
 /comandos - Listado de comandos del bot
 /info - Información general del bot
 /suscribirse - Suscribirte a las alertas de terremotos. 
