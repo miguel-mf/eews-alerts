@@ -2,11 +2,11 @@
 import psycopg2
 from config import config
 import time
-import telegram
+import telebot
 import math
 from tokenID import *
 
-bot = telegram.Bot(token=telegram_token_eew_santiago_bot)
+bot = telebot.TeleBot(telegram_token_eew_santiago_bot)
 
 @bot.message_handler(commands=['info'])
 def handle_command(message):
@@ -15,9 +15,7 @@ def handle_command(message):
 
 @bot.message_handler(commands=['comandos'])
 def handle_command(message):
-    bot.reply_to(message, "Los comandos disponibles para este bot son los siguientes: \n/comandos - Listado de comandos del bot \n/info - Información general del bot \n/suscribirse - Suscribirte a las alertas de terremotos.\n/desuscribirse - Para dejar de recibir alertas.\n/magnitud - Para definir la magnitud a partir de la cual quieres recibir alertas.\n/ubicacion - Indícanos donde vives para darte alertas más personalizadas.\n/distancia - Para definir la distancia hasta la cual quieres recibir alertas.\n/canal - Recibe una invitación al canal con todas las alertas emitidas a lo largo de Chile.\n/teoria - Para un pequeño resumen del funcionamiento de este bot.\n/contacto - Para enviar tu feedback.
-
-")
+    bot.reply_to(message, "Los comandos disponibles para este bot son los siguientes: \n/comandos - Listado de comandos del bot \n/info - Información general del bot \n/suscribirse - Suscribirte a las alertas de terremotos.\n/desuscribirse - Para dejar de recibir alertas.\n/magnitud - Para definir la magnitud a partir de la cual quieres recibir alertas.\n/ubicacion - Indícanos donde vives para darte alertas más personalizadas.\n/distancia - Para definir la distancia hasta la cual quieres recibir alertas.\n/canal - Recibe una invitación al canal con todas las alertas emitidas a lo largo de Chile.\n/teoria - Para un pequeño resumen del funcionamiento de este bot.\n/contacto - Para enviar tu feedback.")
 
 @bot.message_handler(commands=['suscribirse'])
 def handle_command(message):
