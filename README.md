@@ -12,17 +12,17 @@ Para mayor información sobre los comandos disponibles utiliza el comando '/coma
 Para conocer el detalle de como funciona este bot utiliza el comando /teoria.
 
 - /comando
-Los comandos disponibles para este bot son los siguientes:\n
-/comandos - Listado de comandos del bot
-/info - Información general del bot
-/suscribirse - Suscribirte a las alertas de terremotos. 
-/desuscribirse - Para dejar de recibir alertas.
-/magnitud - Para definir la magnitud a partir de la cual quieres recibir alertas.
-/ubicacion - Indícanos donde vives para darte alertas más personalizadas.
-/distancia - Para definir la distancia hasta la cual quieres recibir alertas.
-/canal - Recibe una invitación al canal con todas las alertas emitidas a lo largo de Chile.
-/teoria - Para un pequeño resumen del funcionamiento de este bot.
-/contacto - Para enviar tu feedback.
+Los comandos disponibles para este bot son los siguientes:
+ /comandos - Listado de comandos del bot
+ /info - Información general del bot
+ /suscribirse - Suscribirte a las alertas de terremotos. 
+ /desuscribirse - Para dejar de recibir alertas.
+ /magnitud - Para definir la magnitud a partir de la cual quieres recibir alertas.
+ /ubicacion - Indícanos donde vives para darte alertas más personalizadas.
+ /distancia - Para definir la distancia hasta la cual quieres recibir alertas.
+ /canal - Recibe una invitación al canal con todas las alertas emitidas a lo largo de Chile.
+ /teoria - Para un pequeño resumen del funcionamiento de este bot.
+ /contacto - Para enviar tu feedback.
 
 - /suscribirse
 Felicidades, has sido suscrito a las alertas de terremotos en Chile. Este proceso puede tardar un par de horas en tomar efecto.
