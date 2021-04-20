@@ -28,8 +28,7 @@ def handle_command(message):
 		 
 @bot.message_handler(commands=['magnitud'])
 def handle_command(message):
-    bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0) \n\n3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5 \n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.")
-    bot.send_message(message, "Magnitud?", reply_markup=gen_markup())
+    bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0)\n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.", reply_markup=gen_markup())
 
 @bot.message_handler(commands=['ubicacion'])
 def handle_command(message):
