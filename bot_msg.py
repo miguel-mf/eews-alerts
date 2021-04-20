@@ -104,7 +104,8 @@ def handle_command(message):
 @bot.message_handler(commands=['magnitud'])
 def handle_command(message):
     bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0) \n\n3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5 \n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.")
-		 
+    bot.reply_to(message.chat.id, "Magnitud?", reply_markup=gen_markup()))
+
 @bot.message_handler(commands=['ubicacion'])
 def handle_command(message):
     bot.reply_to(message, "Selecciona una de las siguientes localidades para establecer tu ubicación y poder obtener alertas para los sismos más cercanos. \n\nCombínalo con el comando /distancia y podrás personalizar los sismos que recibes (Por defecto recibirás notificaciones para todo el territorio chileno).\n\n Listado de localidades ... \n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.")
@@ -133,21 +134,23 @@ def handle_command(message):
 def gen_markup():
     markup = InlineKeyboardMarkup()
     markup.row_width = 2
-    markup.add(InlineKeyboardButton("Yes", callback_data="cb_yes"),
-               InlineKeyboardButton("No", callback_data="cb_no"))
+    markup.add(InlineKeyboardButton("3.0", callback_data="mag_3.0"),
+               InlineKeyboardButton("3.5", callback_data="mag_3.5"),
+               InlineKeyboardButton("4.0", callback_data="mag_4.0"),
+               InlineKeyboardButton("4.5", callback_data="mag_4.5"),
+               InlineKeyboardButton("5.0", callback_data="mag_5.0"),
+               InlineKeyboardButton("5.5", callback_data="mag_5.5"),
+               InlineKeyboardButton("6.0", callback_data="mag_6.0"),
+               InlineKeyboardButton("6.5", callback_data="mag_6.5"),
+               InlineKeyboardButton("7.0", callback_data="mag_7.0"),
+               InlineKeyboardButton("7.5", callback_data="mag_7.5"),
+               InlineKeyboardButton("Todas", callback_data="mag_Todas"))
     return markup
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    if call.data == "cb_yes":
-        bot.answer_callback_query(call.id, "Answer is Yes")
-    elif call.data == "cb_no":
-        bot.answer_callback_query(call.id, "Answer is No")
+    bot.answer_callback_query(call.id, "Preferencia actualizada")
 
-@bot.message_handler(commands=['prueba'])
-def handle_command(message):
-    bot.reply_to(message, "Yes/no?", reply_markup=gen_markup())
-	
 @bot.message_handler(func=lambda message: True)
 def message_handler(message):
     bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())
