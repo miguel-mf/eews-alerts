@@ -35,7 +35,7 @@ def handle_command(message):
 		 
 @bot.message_handler(commands=['distancia'])
 def handle_command(message):
-    bot.reply_to(message, "Define una distancia máxima hasta la cual recibir alertas.\n\nUtiliza este valor en conjunto con tu /ubicación para personalizar tus alertas (Por defecto recibirás notificaciones para cualquier distancia).\n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.", reply_markup=gen_markup_distancia())
+    bot.reply_to(message, "Define una distancia máxima hasta la cual recibir alertas.\n\nUtiliza este valor en conjunto con tu /ubicacion para personalizar tus alertas (Por defecto recibirás notificaciones para cualquier distancia).\n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.", reply_markup=gen_markup_distancia())
 		 
 @bot.message_handler(commands=['canal'])
 def handle_command(message):
