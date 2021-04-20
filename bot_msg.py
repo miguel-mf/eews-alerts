@@ -53,7 +53,6 @@ def handle_command(message):
 @bot.message_handler(commands=['magnitud'])
 def handle_command(message):
     bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0)\n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.")
-    bot.reply_to(message, inline_keyboard: )
 		 		 
 @bot.message_handler(func=lambda message: True)
 def handle_all_message(message):
