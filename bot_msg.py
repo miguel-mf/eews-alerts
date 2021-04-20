@@ -5,6 +5,7 @@ import time
 import telebot
 import math
 from tokenID import *
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 bot = telebot.TeleBot(telegram_token_eew_santiago_bot)
 
@@ -48,10 +49,35 @@ def handle_command(message):
 @bot.message_handler(commands=['contacto'])
 def handle_command(message):
     bot.reply_to(message, "Cualquier comentario o sugerencia enviarlo a mmedina@csn.uchile.cl")
-		 
+
+@bot.message_handler(commands=['magnitud'])
+def handle_command(message):
+    bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0)\n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.")
+    bot.reply_to(message, inline_keyboard: )
+		 		 
 @bot.message_handler(func=lambda message: True)
 def handle_all_message(message):
 	bot.reply_to(message, "Hola, bienvenido al bot de Alerta Temprana. Si buscas información respecto a este bot utiliza el comando /info.")
 
+	
+def gen_markup():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 2
+    markup.add(InlineKeyboardButton("Yes", callback_data="cb_yes"),
+               InlineKeyboardButton("No", callback_data="cb_no"))
+    return markup
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    if call.data == "cb_yes":
+        bot.answer_callback_query(call.id, "Answer is Yes")
+    elif call.data == "cb_no":
+        bot.answer_callback_query(call.id, "Answer is No")
+
+@bot.message_handler(commands=['prueba'])
+def handle_command(message):
+	bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())	
+	
+	
 if __name__ == '__main__':
-    bot.polling()
+    bot.polling(none_stop=True)
