@@ -31,7 +31,7 @@ def handle_command(message):
 
 @bot.message_handler(commands=['ubicacion'])
 def handle_command(message):
-    bot.reply_to(message, "Selecciona una de las siguientes localidades para establecer tu ubicación y poder obtener alertas para los sismos más cercanos. \n\nCombínalo con el comando /distancia y podrás personalizar los sismos que recibes (Por defecto recibirás notificaciones para todo el territorio chileno).\n\n Listado de localidades ... \n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.")
+    bot.reply_to(message, "Selecciona una de las siguientes localidades para establecer tu ubicación y poder obtener alertas para los sismos más cercanos. \n\nCombínalo con el comando /distancia y podrás personalizar los sismos que recibes (Por defecto recibirás notificaciones para todo el territorio chileno).\n\n Listado de localidades ... \n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.", reply_markup=gen_markup_regiones())
 		 
 @bot.message_handler(commands=['distancia'])
 def handle_command(message):
@@ -82,6 +82,101 @@ def gen_markup_distancia():
 	       InlineKeyboardButton("Todo Chile", callback_data="dist_Todo Chile"))
     return markup
 
+def gen_markup_regiones():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 1
+    markup.add(InlineKeyboardButton("Norte Grande", callback_data="region_norte-grande"),
+	       InlineKeyboardButton("Norte Chico", callback_data="region_norte-chico"),
+	       InlineKeyboardButton("Central", callback_data="region_central"),
+	       InlineKeyboardButton("Sur", callback_data="region_sur"),
+	       InlineKeyboardButton("Austral", callback_data="region_austral"))
+    return markup
+
+def gen_markup_norte_grande():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 2
+    markup.add(InlineKeyboardButton("Arica", callback_data="ubicacion_Arica"),
+	       InlineKeyboardButton("Putre", callback_data="ubicacion_Putre"),
+	       InlineKeyboardButton("Colchane", callback_data="ubicacion_Colchane"),
+	       InlineKeyboardButton("Iquique", callback_data="ubicacion_Iquique"),
+	       InlineKeyboardButton("Ollagüe", callback_data="ubicacion_Ollagüe"),
+	       InlineKeyboardButton("Tocopilla", callback_data="ubicacion_Tocopilla"),
+	       InlineKeyboardButton("Calama", callback_data="ubicacion_Calama"),
+	       InlineKeyboardButton("San Pedro de Atacama", callback_data="ubicacion_San-Pedro-de-Atacama"),
+	       InlineKeyboardButton("Mejillones", callback_data="ubicacion_Mejillones"),
+	       InlineKeyboardButton("Antofagasta", callback_data="ubicacion_Antofagasta"),
+	       InlineKeyboardButton("Mina Escondida", callback_data="ubicacion_Mina-Escondida"),
+	       InlineKeyboardButton("Taltal", callback_data="ubicacion_Taltal"),
+	       InlineKeyboardButton("El Salvador", callback_data="ubicacion_El-Salvador"),
+	       InlineKeyboardButton("Chañaral", callback_data="ubicacion_Chañaral"))
+    return markup
+
+def gen_markup_norte_chico():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 2
+    markup.add(InlineKeyboardButton("Caldera", callback_data="ubicacion_Caldera"),
+	       InlineKeyboardButton("Copiapó", callback_data="ubicacion_Copiapó"),
+	       InlineKeyboardButton("Vallenar", callback_data="ubicacion_Vallenar"),
+	       InlineKeyboardButton("Huasco", callback_data="ubicacion_Huasco"),
+	       InlineKeyboardButton("Coquimbo", callback_data="ubicacion_Coquimbo"),
+	       InlineKeyboardButton("Ovalle", callback_data="ubicacion_Ovalle"),
+	       InlineKeyboardButton("Combarbalá", callback_data="ubicacion_Combarbalá"),
+	       InlineKeyboardButton("Illapel", callback_data="ubicacion_Illapel"),
+	       InlineKeyboardButton("Los Vilos", callback_data="ubicacion_Los-Vilos"),
+	       InlineKeyboardButton("San Felipe", callback_data="ubicacion_San-Felipe"))
+    return markup
+
+def gen_markup_central():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 2
+    markup.add(InlineKeyboardButton("Valparaíso", callback_data="ubicacion_Valparaíso"),
+	       InlineKeyboardButton("Santiago", callback_data="ubicacion_Santiago"),
+	       InlineKeyboardButton("San Antonio", callback_data="ubicacion_San-Antonio"),
+	       InlineKeyboardButton("Rancagua", callback_data="ubicacion_Rancagua"),
+	       InlineKeyboardButton("San Fernando", callback_data="ubicacion_San-Fernando"),
+	       InlineKeyboardButton("Pichilemu", callback_data="ubicacion_Pichilemu"),
+	       InlineKeyboardButton("Iloca", callback_data="ubicacion_Iloca"),
+	       InlineKeyboardButton("Curicó", callback_data="ubicacion_Curicó"),
+	       InlineKeyboardButton("Constitución", callback_data="ubicacion_Constitución"),
+	       InlineKeyboardButton("Talca", callback_data="ubicacion_Talca"),
+	       InlineKeyboardButton("Linares", callback_data="ubicacion_Linares"),
+	       InlineKeyboardButton("Cauquenes", callback_data="ubicacion_Cauquenes"),
+	       InlineKeyboardButton("Chillán", callback_data="ubicacion_Chillán"),
+	       InlineKeyboardButton("Concepción", callback_data="ubicacion_Concepción"))
+    return markup
+
+def gen_markup_sur():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 2
+    markup.add(InlineKeyboardButton("Los Ángeles", callback_data="ubicacion_Los Ángeles"),
+	       InlineKeyboardButton("Lebu", callback_data="ubicacion_Lebu"),
+	       InlineKeyboardButton("Angol", callback_data="ubicacion_Angol"),
+	       InlineKeyboardButton("Tirúa", callback_data="ubicacion_Tirúa"),
+	       InlineKeyboardButton("Temuco", callback_data="ubicacion_Temuco"),
+	       InlineKeyboardButton("Villarrica", callback_data="ubicacion_Villarrica"),
+	       InlineKeyboardButton("Valdivia", callback_data="ubicacion_Valdivia"),
+	       InlineKeyboardButton("La Unión", callback_data="ubicacion_La Unión"),
+	       InlineKeyboardButton("Puerto Montt", callback_data="ubicacion_Puerto Montt"),
+	       InlineKeyboardButton("Osorno", callback_data="ubicacion_Osorno"))
+    return markup
+
+def gen_markup_austral():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 2
+    markup.add(InlineKeyboardButton("Castro", callback_data="ubicacion_Castro"),
+	       InlineKeyboardButton("Chaitén", callback_data="ubicacion_Chaitén"),
+	       InlineKeyboardButton("La Junta", callback_data="ubicacion_La Junta"),
+	       InlineKeyboardButton("Coyhaique", callback_data="ubicacion_Coyhaique"),
+	       InlineKeyboardButton("Puerto Aysén", callback_data="ubicacion_Puerto Aysén"),
+	       InlineKeyboardButton("Chile Chico", callback_data="ubicacion_Chile Chico"),
+	       InlineKeyboardButton("Cochrane", callback_data="ubicacion_Cochrane"),
+	       InlineKeyboardButton("Puerto Natales", callback_data="ubicacion_Puerto Natales"),
+	       InlineKeyboardButton("Punta Arenas", callback_data="ubicacion_Punta Arenas"),
+	       InlineKeyboardButton("Porvenir", callback_data="ubicacion_Porvenir"),
+	       InlineKeyboardButton("Puerto Williams", callback_data="ubicacion_Puerto Williams"))
+    return markup
+
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
     if "mag" in call.data:
@@ -92,11 +187,23 @@ def callback_query(call):
         dist = call.data.split("_")[1]
         bot.answer_callback_query(call.id, "Preferencia de distancia actualizada: %s" % (dist))
         bot.send_message(call.message.chat.id, "Preferencia de distancia actualizada: %s" % (dist))
-
-
-#@bot.message_handler(func=lambda message: True)
-#def message_handler(message):
-#    bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())
-	
+    if "region" in call.data:
+        region = call.data.split("_")[1]
+	if "region" == "norte-grande":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_norte_grande())
+	elif "region" == "norte-chico":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_norte_chico())
+	elif "region" == "central":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_central())
+	elif "region" == "sur":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_sur())
+	elif "region" == "austral":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_austral())
+    if "ubicacion" in call.data:
+        ubicacion = call.data.split("_")[1].replace("-", " ")
+        bot.answer_callback_query(call.id, "Preferencia de ubicación actualizada: %s" % (ubicacion))
+        bot.send_message(call.message.chat.id, "Preferencia de ubicación actualizada: %s" % (ubicacion))
+	 
+		
 if __name__ == '__main__':
     bot.polling(none_stop=True)
