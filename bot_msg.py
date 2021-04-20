@@ -125,9 +125,9 @@ def handle_command(message):
 def handle_command(message):
     bot.reply_to(message, "Cualquier comentario o sugerencia enviarlo a mmedina@csn.uchile.cl")
 		 		 
-@bot.message_handler(func=lambda message: True)
-def handle_all_message(message):
-	bot.reply_to(message, "Hola, bienvenido al bot de Alerta Temprana. Si buscas información respecto a este bot utiliza el comando /info.")
+#@bot.message_handler(func=lambda message: True)
+#def handle_all_message(message):
+#	bot.reply_to(message, "Hola, bienvenido al bot de Alerta Temprana. Si buscas información respecto a este bot utiliza el comando /info.")
 
 	
 def gen_markup():
@@ -148,10 +148,9 @@ def callback_query(call):
 def handle_command(message):
     bot.reply_to(message, "Yes/no?", reply_markup=gen_markup())
 	
-if __name__ == '__main__':
-    bot.polling(none_stop=True)
-
-	
+@bot.message_handler(func=lambda message: True)
+def message_handler(message):
+    bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())
 	
 if __name__ == '__main__':
     bot.polling(none_stop=True)
