@@ -189,16 +189,17 @@ def callback_query(call):
         bot.send_message(call.message.chat.id, "Preferencia de distancia actualizada: %s" % (dist))
     if "region" in call.data:
         region = call.data.split("_")[1]
-        if "region" == "norte-grande":
-            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_norte_grande())
-        elif "region" == "norte-chico":
-            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_norte_chico())
-        elif "region" == "central":
-            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_central())
-        elif "region" == "sur":
-            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_sur())
-        elif "region" == "austral":
-            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades: %s" % (loc), reply_markup=gen_markup_austral())
+        print(region)
+        if region == "norte-grande":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_norte_grande())
+        elif region == "norte-chico":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_norte_chico())
+        elif region == "central":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_central())
+        elif region == "sur":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_sur())
+        elif region == "austral":
+            bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_austral())
     if "ubicacion" in call.data:
         ubicacion = call.data.split("_")[1].replace("-", " ")
         bot.answer_callback_query(call.id, "Preferencia de ubicación actualizada: %s" % (ubicacion))
