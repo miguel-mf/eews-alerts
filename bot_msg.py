@@ -73,7 +73,9 @@ def gen_markup():
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    bot.answer_callback_query(call.id, "Preferencia actualizada")
+	if "mag" in call.data:
+		mag = call.data.split("_")[1]
+    	bot.answer_callback_query(call.id, "Preferencia de magnitud actualizada: %s" % (mag))
 
 @bot.message_handler(func=lambda message: True)
 def message_handler(message):
