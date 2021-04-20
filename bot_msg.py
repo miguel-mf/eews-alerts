@@ -146,7 +146,7 @@ def callback_query(call):
 
 @bot.message_handler(commands=['prueba'])
 def handle_command(message):
-	bot.reply_to(message, "Yes/no?", reply_markup=gen_markup())
+    bot.reply_to(message, "Yes/no?", reply_markup=gen_markup())
 	
 if __name__ == '__main__':
     bot.polling(none_stop=True)
