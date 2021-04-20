@@ -27,19 +27,19 @@ def handle_command(message):
 		 
 @bot.message_handler(commands=['magnitud'])
 def handle_command(message):
-    bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones? Selecciona un valor entre las siguientes opciones (valor por defecto 3.0) 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5 Recuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.")
+    bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0) \n\n3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5 \n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.")
 		 
 @bot.message_handler(commands=['ubicacion'])
 def handle_command(message):
-    bot.reply_to(message, "Selecciona una de las siguientes localidades para establecer tu ubicación y poder obtener alertas para los sismos más cercanos. Combínalo con el comando /distancia y podrás personalizar los sismos que recibes. (Por defecto recibirás notificaciones para todo el territorio chileno) \n Listado de localidades ... \nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas. Tu ubicación real no será adquirida o utilizada por este sistema de alertas.")
+    bot.reply_to(message, "Selecciona una de las siguientes localidades para establecer tu ubicación y poder obtener alertas para los sismos más cercanos. \n\nCombínalo con el comando /distancia y podrás personalizar los sismos que recibes (Por defecto recibirás notificaciones para todo el territorio chileno).\n\n Listado de localidades ... \n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.")
 		 
 @bot.message_handler(commands=['distancia'])
 def handle_command(message):
-    bot.reply_to(message, "Define una distancia máxima hasta la cual recibir alertas. Utiliza este valor en conjunto con tu /ubicación para personalizar tus alertas (Por defecto recibirás notificaciones para cualquier distancia)\n100km 200km 300km 500km 800km Todo Chile\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas. Tu ubicación real no será adquirida o utilizada por este sistema de alertas.")
+    bot.reply_to(message, "Define una distancia máxima hasta la cual recibir alertas.\n\nUtiliza este valor en conjunto con tu /ubicación para personalizar tus alertas (Por defecto recibirás notificaciones para cualquier distancia).\n\n100km 200km 300km 500km 800km Todo Chile\n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.")
 		 
 @bot.message_handler(commands=['canal'])
 def handle_command(message):
-    bot.reply_to(message, "Recibe una invitación al canal donde se emiten alertas para todo Chile.")
+    bot.reply_to(message, "Para acceder al canal de Alerta Temprana clickea el siguiente link.\n\nhttps://t.me/joinchat/V5-olf-vH5w2YmZh\n\nEn este canal se generan alertas para todos los sismos de magnitud 3.0 y superior en el territorio chileno.")
 		 
 @bot.message_handler(commands=['teoria'])
 def handle_command(message):
@@ -47,7 +47,7 @@ def handle_command(message):
 		 
 @bot.message_handler(commands=['contacto'])
 def handle_command(message):
-    bot.reply_to(message, "Trabajo en proceso")
+    bot.reply_to(message, "Cualquier comentario o sugerencia enviarlo a mmedina@csn.uchile.cl")
 		 
 @bot.message_handler(func=lambda message: True)
 def handle_all_message(message):
