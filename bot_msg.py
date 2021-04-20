@@ -87,9 +87,12 @@ def callback_query(call):
     if "mag" in call.data:
         mag = call.data.split("_")[1]
         bot.answer_callback_query(call.id, "Preferencia de magnitud actualizada: %s" % (mag))
+        bot.send_message(call.message.chat.id, "Preferencia de magnitud actualizada: %s" % (mag))
     if "dist" in call.data:
         dist = call.data.split("_")[1]
         bot.answer_callback_query(call.id, "Preferencia de distancia actualizada: %s" % (dist))
+        bot.send_message(call.message.chat.id, "Preferencia de distancia actualizada: %s" % (dist))
+
 
 #@bot.message_handler(func=lambda message: True)
 #def message_handler(message):
