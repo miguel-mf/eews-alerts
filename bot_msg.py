@@ -13,7 +13,6 @@ bot = telebot.TeleBot(telegram_token_eew_santiago_bot)
 def handle_command(message):
     bot.reply_to(message, "Este bot te permite recibir alertas rápidas de los sismos que ocurren en Chile, las que puedes personalizar a tu gusto.\n\nPara empezar a recibir alertas personalizadas de terremotos utiliza el comando '/suscribirse' y sigue las instrucciones.\n\nSi deseas recibir todas las alertas disponibles puedes usar el comando /canal para unirte al canal que contiene todas las alertas de sismos en Chile.\n\nPara mayor información sobre los comandos disponibles utiliza el comando '/comandos'.\n\nPara conocer el detalle de como funciona este bot utiliza el comando /teoria.")
 
-
 @bot.message_handler(commands=['comandos'])
 def handle_command(message):
     bot.reply_to(message, "Los comandos disponibles para este bot son los siguientes: \n/comandos - Listado de comandos del bot \n/info - Información general del bot \n/suscribirse - Suscribirte a las alertas de terremotos.\n/desuscribirse - Para dejar de recibir alertas.\n/magnitud - Para definir la magnitud a partir de la cual quieres recibir alertas.\n/ubicacion - Indícanos donde vives para darte alertas más personalizadas.\n/distancia - Para definir la distancia hasta la cual quieres recibir alertas.\n/canal - Recibe una invitación al canal con todas las alertas emitidas a lo largo de Chile.\n/teoria - Para un pequeño resumen del funcionamiento de este bot.\n/contacto - Para enviar tu feedback.")
@@ -28,7 +27,7 @@ def handle_command(message):
 		 
 @bot.message_handler(commands=['magnitud'])
 def handle_command(message):
-    bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0)\n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.", reply_markup=gen_markup())
+    bot.reply_to(message, "¿Desde que valor de magnitud preliminar te gustaría recibir notificaciones?\n\nSelecciona un valor entre las siguientes opciones (valor por defecto 3.0)\n\nRecuerda que la magnitud preliminar es una estimación rápida y puede variar con respecto al valor final.", reply_markup=gen_markup_mag())
 
 @bot.message_handler(commands=['ubicacion'])
 def handle_command(message):
@@ -36,7 +35,7 @@ def handle_command(message):
 		 
 @bot.message_handler(commands=['distancia'])
 def handle_command(message):
-    bot.reply_to(message, "Define una distancia máxima hasta la cual recibir alertas.\n\nUtiliza este valor en conjunto con tu /ubicación para personalizar tus alertas (Por defecto recibirás notificaciones para cualquier distancia).\n\n100km 200km 300km 500km 800km Todo Chile\n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.")
+    bot.reply_to(message, "Define una distancia máxima hasta la cual recibir alertas.\n\nUtiliza este valor en conjunto con tu /ubicación para personalizar tus alertas (Por defecto recibirás notificaciones para cualquier distancia).\n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.")
 		 
 @bot.message_handler(commands=['canal'])
 def handle_command(message):
@@ -50,16 +49,16 @@ def handle_command(message):
 def handle_command(message):
     bot.reply_to(message, "Cualquier comentario o sugerencia enviarlo a mmedina@csn.uchile.cl")
 		 		 
-#@bot.message_handler(func=lambda message: True)
-#def handle_all_message(message):
-#	bot.reply_to(message, "Hola, bienvenido al bot de Alerta Temprana. Si buscas información respecto a este bot utiliza el comando /info.")
+@bot.message_handler(func=lambda message: True)
+def handle_all_message(message):
+    bot.reply_to(message, "Hola, bienvenido al bot de Alerta Temprana. Si buscas información respecto a este bot utiliza el comando /info.")
 
 	
-def gen_markup():
+def gen_markup_mag():
     markup = InlineKeyboardMarkup()
     markup.row_width = 2
     markup.add(InlineKeyboardButton("3.0", callback_data="mag_3.0"),
-               InlineKeyboardButton("3.5", callback_data="mag_3.5"),
+	       InlineKeyboardButton("3.5", callback_data="mag_3.5"),
                InlineKeyboardButton("4.0", callback_data="mag_4.0"),
                InlineKeyboardButton("4.5", callback_data="mag_4.5"),
                InlineKeyboardButton("5.0", callback_data="mag_5.0"),
@@ -71,15 +70,30 @@ def gen_markup():
                InlineKeyboardButton("Todas", callback_data="mag_Todas"))
     return markup
 
+def gen_markup_distancia():
+    markup = InlineKeyboardMarkup()
+    markup.row_width = 2
+    markup.add(InlineKeyboardButton("100", callback_data="dist_100"),
+	       InlineKeyboardButton("200", callback_data="dist_200"),
+	       InlineKeyboardButton("300", callback_data="dist_300"),
+	       InlineKeyboardButton("500", callback_data="dist_500"),
+	       InlineKeyboardButton("800", callback_data="dist_800"),
+	       InlineKeyboardButton("1000", callback_data="dist_1000"),
+	       InlineKeyboardButton("Todo Chile", callback_data="dist_Todo Chile"))
+    return markup
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
     if "mag" in call.data:
         mag = call.data.split("_")[1]
         bot.answer_callback_query(call.id, "Preferencia de magnitud actualizada: %s" % (mag))
+    if "dist" in call.data:
+        dist = call.data.split("_")[1]
+        bot.answer_callback_query(call.id, "Preferencia de distancia actualizada: %s" % (dist))
 
-@bot.message_handler(func=lambda message: True)
-def message_handler(message):
-    bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())
+#@bot.message_handler(func=lambda message: True)
+#def message_handler(message):
+#    bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())
 	
 if __name__ == '__main__':
     bot.polling(none_stop=True)
