@@ -231,4 +231,8 @@ def callback_query(call):
 		bot.send_message(call.message.chat.id, "Preferencia de ubicación actualizada: %s" % (ubicacion))
 		
 if __name__ == '__main__':
-    bot.polling(none_stop=True)
+	while True:
+                try:
+                        bot.polling(none_stop=True)
+                except:
+                        time.sleep(60)
