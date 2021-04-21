@@ -194,18 +194,18 @@ def gen_markup_austral():
 def callback_query(call):
 	if "mag" in call.data:
 		mag = call.data.split("_")[1]
-		if not db.search(user_check.chat_id == message.chat.id):
+		if not db.search(user_check.chat_id == call.message.chat.id):
 			bot.send_message(call.message.chat.id, "Debes suscribirte en primer lugar")
 		else:
-			db.update({'magnitud': mag}, user_check.chat_id == message.chat.id)
+			db.update({'magnitud': mag}, user_check.chat_id == call.message.chat.id)
 			bot.answer_callback_query(call.id, "Preferencia de magnitud actualizada: %s" % (mag))
 			bot.send_message(call.message.chat.id, "Preferencia de magnitud actualizada: %s" % (mag))
 	if "dist" in call.data:
 		dist = call.data.split("_")[1]	
-		if not db.search(user_check.chat_id == message.chat.id):
+		if not db.search(user_check.chat_id == call.message.chat.id):
 			bot.send_message(call.message.chat.id, "Debes suscribirte en primer lugar")
 		else:
-			db.update({'distancia': dist}, user_check.chat_id == message.chat.id)
+			db.update({'distancia': dist}, user_check.chat_id == call.message.chat.id)
 			bot.answer_callback_query(call.id, "Preferencia de distancia actualizada: %s" % (dist))
 			bot.send_message(call.message.chat.id, "Preferencia de distancia actualizada: %s" % (dist))
 	if "region" in call.data:
@@ -222,10 +222,10 @@ def callback_query(call):
 		    bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_austral())
 	if "ubicacion" in call.data:
 		ubicacion = call.data.split("_")[1].replace("-", " ")
-		if not db.search(user_check.chat_id == message.chat.id):
+		if not db.search(user_check.chat_id == call.message.chat.id):
 			bot.send_message(call.message.chat.id, "Debes suscribirte en primer lugar")
 		else:
-			db.update({'ubicacion': ubicacion}, user_check.chat_id == message.chat.id)
+			db.update({'ubicacion': ubicacion}, user_check.chat_id == call.message.chat.id)
 			bot.answer_callback_query(call.id, "Preferencia de ubicación actualizada: %s" % (ubicacion))
 			bot.send_message(call.message.chat.id, "Preferencia de ubicación actualizada: %s" % (ubicacion))
 		
