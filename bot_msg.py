@@ -26,11 +26,11 @@ def handle_command(message):
 @bot.message_handler(commands=['suscribirse'])
 def handle_command(message):
 	if not db.search(user_check.chat_id == message.chat.id):
-		bot.reply_to(message, "Ya estás suscrito a estas alertas.")
-	else:
 		db.insert({'chat_id':message.chat.id, 'magnitud':3.0,'ubicacion':'Ninguna', 'distancia':999999, 'date':message.date, 
 					'username':message.from_user.id, 'username':message.from_user.first_name, 'bot'=message.from_user.is_bot})
 		bot.reply_to(message, "Felicidades, has sido suscrito a las alertas de terremotos en Chile. Este proceso puede tardar un par de horas en tomar efecto.\n\nRecibirás una notificación por este chat cada vez que ocurra un sismo de magnitud preliminar superior a 3.0 en Chile.\n\nPara personalizar las notificaciones que recibes utiliza los comandos /magnitud, /ubicacion y /distancia.\n\nPara dejar de recibir notificaciones utiliza el comando /desuscribirse.")
+	else:
+		bot.reply_to(message, "Ya estás suscrito a estas alertas.")
 
 @bot.message_handler(commands=['desuscribirse'])
 def handle_command(message):
