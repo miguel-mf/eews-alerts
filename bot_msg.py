@@ -210,7 +210,6 @@ def callback_query(call):
 			bot.send_message(call.message.chat.id, "Preferencia de distancia actualizada: %s" % (dist))
 	if "region" in call.data:
 		region = call.data.split("_")[1]
-		print(region)
 		if region == "norte-grande":
 		    bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_norte_grande())
 		elif region == "norte-chico":
@@ -235,4 +234,4 @@ if __name__ == '__main__':
                 try:
                         bot.polling(none_stop=True)
                 except:
-                        time.sleep(60)
+                        time.sleep(10)
