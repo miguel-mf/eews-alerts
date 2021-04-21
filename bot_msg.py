@@ -6,10 +6,16 @@ import telebot
 import math
 from tokenID import *
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from tinydb import TinyDB, Query
 
 bot = telebot.TeleBot(telegram_token_eew_santiago_bot)
+db = TinyDB('db.json')
 
 @bot.message_handler(commands=['info'])
+def handle_command(message):
+    bot.reply_to(message, "Este bot te permite recibir alertas rápidas de los sismos que ocurren en Chile, las que puedes personalizar a tu gusto.\n\nPara empezar a recibir alertas personalizadas de terremotos utiliza el comando '/suscribirse' y sigue las instrucciones.\n\nSi deseas recibir todas las alertas disponibles puedes usar el comando /canal para unirte al canal que contiene todas las alertas de sismos en Chile.\n\nPara mayor información sobre los comandos disponibles utiliza el comando '/comandos'.\n\nPara conocer el detalle de como funciona este bot utiliza el comando /teoria.")
+
+@bot.message_handler(commands=['start'])
 def handle_command(message):
     bot.reply_to(message, "Este bot te permite recibir alertas rápidas de los sismos que ocurren en Chile, las que puedes personalizar a tu gusto.\n\nPara empezar a recibir alertas personalizadas de terremotos utiliza el comando '/suscribirse' y sigue las instrucciones.\n\nSi deseas recibir todas las alertas disponibles puedes usar el comando /canal para unirte al canal que contiene todas las alertas de sismos en Chile.\n\nPara mayor información sobre los comandos disponibles utiliza el comando '/comandos'.\n\nPara conocer el detalle de como funciona este bot utiliza el comando /teoria.")
 
@@ -19,7 +25,12 @@ def handle_command(message):
 
 @bot.message_handler(commands=['suscribirse'])
 def handle_command(message):
-    bot.reply_to(message, "Felicidades, has sido suscrito a las alertas de terremotos en Chile. Este proceso puede tardar un par de horas en tomar efecto.\n\nRecibirás una notificación por este chat cada vez que ocurra un sismo de magnitud preliminar superior a 3.0 en Chile.\n\nPara personalizar las notificaciones que recibes utiliza los comandos /magnitud, /ubicacion y /distancia.\n\nPara dejar de recibir notificaciones utiliza el comando /desuscribirse.")
+	if not db.search(user_check.chat_id == message.chat.id):
+		bot.reply_to(message, "Ya estás suscrito a estas alertas.")
+	else:
+		db.insert({'chat_id':message.chat.id, 'magnitud':3.0,'ubicacion':'Ninguna', 'distancia':999999, 'date':message.date, 
+					'username':message.from_user.id, 'username':message.from_user.first_name, 'bot'=message.from_user.is_bot})
+		bot.reply_to(message, "Felicidades, has sido suscrito a las alertas de terremotos en Chile. Este proceso puede tardar un par de horas en tomar efecto.\n\nRecibirás una notificación por este chat cada vez que ocurra un sismo de magnitud preliminar superior a 3.0 en Chile.\n\nPara personalizar las notificaciones que recibes utiliza los comandos /magnitud, /ubicacion y /distancia.\n\nPara dejar de recibir notificaciones utiliza el comando /desuscribirse.")
 
 @bot.message_handler(commands=['desuscribirse'])
 def handle_command(message):
@@ -31,7 +42,7 @@ def handle_command(message):
 
 @bot.message_handler(commands=['ubicacion'])
 def handle_command(message):
-    bot.reply_to(message, "Selecciona una de las siguientes localidades para establecer tu ubicación y poder obtener alertas para los sismos más cercanos. \n\nCombínalo con el comando /distancia y podrás personalizar los sismos que recibes (Por defecto recibirás notificaciones para todo el territorio chileno).\n\n Listado de localidades ... \n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.", reply_markup=gen_markup_regiones())
+    bot.reply_to(message, "Selecciona una de las siguientes localidades para establecer tu ubicación y poder obtener alertas para los sismos más cercanos. \n\nCombínalo con el comando /distancia y podrás personalizar los sismos que recibes (Por defecto recibirás notificaciones para todo el territorio chileno).\n\nRecuerda que la ubicación preliminar de los sismos puede contener errores y esto puede afectar las alertas que recibas.\n\nTu ubicación real no será adquirida o utilizada por este sistema de alertas.", reply_markup=gen_markup_regiones())
 		 
 @bot.message_handler(commands=['distancia'])
 def handle_command(message):
