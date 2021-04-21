@@ -28,7 +28,7 @@ def handle_command(message):
 def handle_command(message):
 	if not db.search(user_check.chat_id == message.chat.id):
 		db.insert({'chat_id':message.chat.id, 'magnitud':3.0,'ubicacion':'Ninguna', 'distancia':999999, 'date':message.date, 
-					'username':message.from_user.id, 'username':message.from_user.first_name)
+					'username':message.from_user.id, 'username':message.from_user.first_name})
 		bot.reply_to(message, "Felicidades, has sido suscrito a las alertas de terremotos en Chile. Este proceso puede tardar un par de horas en tomar efecto.\n\nRecibirás una notificación por este chat cada vez que ocurra un sismo de magnitud preliminar superior a 3.0 en Chile.\n\nPara personalizar las notificaciones que recibes utiliza los comandos /magnitud, /ubicacion y /distancia.\n\nPara dejar de recibir notificaciones utiliza el comando /desuscribirse.")
 	else:
 		bot.reply_to(message, "Ya estás suscrito a estas alertas.")
@@ -200,7 +200,7 @@ def callback_query(call):
 			db.update({'magnitud': mag}, user_check.chat_id == message.chat.id)
 			bot.answer_callback_query(call.id, "Preferencia de magnitud actualizada: %s" % (mag))
 			bot.send_message(call.message.chat.id, "Preferencia de magnitud actualizada: %s" % (mag))
-		if "dist" in call.data:
+	if "dist" in call.data:
 		dist = call.data.split("_")[1]	
 		if not db.search(user_check.chat_id == message.chat.id):
 			bot.send_message(call.message.chat.id, "Debes suscribirte en primer lugar")
@@ -208,7 +208,7 @@ def callback_query(call):
 			db.update({'distancia': dist}, user_check.chat_id == message.chat.id)
 			bot.answer_callback_query(call.id, "Preferencia de distancia actualizada: %s" % (dist))
 			bot.send_message(call.message.chat.id, "Preferencia de distancia actualizada: %s" % (dist))
-		if "region" in call.data:
+	if "region" in call.data:
 		region = call.data.split("_")[1]
 		print(region)
 		if region == "norte-grande":
@@ -221,7 +221,7 @@ def callback_query(call):
 		    bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_sur())
 		elif region == "austral":
 		    bot.send_message(call.message.chat.id, "Elige entre las siguientes localidades:" , reply_markup=gen_markup_austral())
-		if "ubicacion" in call.data:
+	if "ubicacion" in call.data:
 		ubicacion = call.data.split("_")[1].replace("-", " ")
 		if not db.search(user_check.chat_id == message.chat.id):
 			bot.send_message(call.message.chat.id, "Debes suscribirte en primer lugar")
