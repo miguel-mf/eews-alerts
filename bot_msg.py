@@ -9,7 +9,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from tinydb import TinyDB, Query
 
 bot = telebot.TeleBot(telegram_token_eew_santiago_bot)
-db = TinyDB('db.json')
+db = TinyDB('db_users.json')
 user_check = Query()
 
 @bot.message_handler(commands=['info'])
