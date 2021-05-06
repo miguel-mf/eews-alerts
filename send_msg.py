@@ -11,7 +11,6 @@ lon = -74
 
 def main():
     db = TinyDB('db_users.json')
-    user_check = Query()
     bot = telegram.Bot(token=telegram_token_eew_santiago_bot)
     status = bot.send_message(chat_id=eew_channel_id, text=mensaje, parse_mode=telegram.ParseMode.HTML)
     status = bot.send_message(chat_id=test_channel_id, text=mensaje, parse_mode=telegram.ParseMode.HTML)
