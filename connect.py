@@ -42,8 +42,23 @@ def connect():
                 if mag >= 5.0:
                     status = bot.send_message(chat_id=eew_channel_M5_id, text=status_msg, parse_mode=telegram.ParseMode.HTML)
                     status = bot.sendLocation(chat_id=eew_channel_M5_id, latitude=lat, longitude=lon, disable_notification = True)
-            else:
-                continue
+                db = TinyDB('db_users.json')
+                distancias = distancia_a_localidades(lat,lon)
+                for entry in db.all:
+                    if entry.ubicacion == 'Ninguna':
+                        en_rango = True
+                    else:
+                        ubicacion = entry.ubicacion
+                        distancia = distancias.ubicacion
+                        if distancia <= entry.distancia:
+                            en_rango = True
+                        else:
+                            en_rango = False # Creo que esto es redundante.
+                            continue
+                    if (mag >= entry.magnitud) and en_rango:
+                        status = bot.send_message(chat_id=entry.chat_id, text=mensaje, parse_mode=telegram.ParseMode.HTML)
+                        else:
+                            continue
 
 if __name__ == '__main__':
     connect()
